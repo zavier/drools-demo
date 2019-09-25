@@ -1,0 +1,76 @@
+package rules;
+
+import com.pojo.Person;
+import com.pojo.School;
+
+rule "containsTest"
+    when
+        $s : School()
+        $P : Person(className contains $s.className)
+    then
+        System.out.println("contains success");
+end
+
+
+rule "containsTest002"
+    when
+        $s : School()
+        $P : Person(className contains "一")
+    then
+        System.out.println("contains one success");
+end
+
+
+rule "containsTest003"
+    when
+        $s : School()
+        $P : Person(className contains $s.className)
+    then
+        $s.setClassName("二班");
+        update($s)
+        System.out.println("match containsTest003");
+end
+
+
+rule "containsTest004"
+    salience 1
+    when
+        $s : School()
+        $P : Person(className not contains $s.className)
+    then
+        System.out.println("contains containsTest004 success:");
+end
+
+
+rule "memberOfTest001"
+    when
+        $s: School();
+        $p: Person(className memberOf $s.getClassNameArray());
+    then
+        System.out.println("memberOfTest001 success");
+end
+
+
+rule "memberOfTest002"
+    when
+        $s: School();
+        $p: Person(className memberOf "一班");
+    then
+        System.out.println("memberOfTest002 success");
+end
+
+
+rule "matchesTest001"
+    when
+        $p : Person(name matches "张.*");
+    then
+        System.out.println("matchesTest001 success");
+end
+
+// str[startsWith] | [endsWith] | [length]
+rule "strTest001"
+    when
+        $p : Person(name str[startsWith] "张")
+    then
+        System.out.println("strTest001 success");
+end

@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <kmodule xmlns="http://www.drools.org/xsd/kmodule">
     <kbase name="rules" packages="rules">
-        <ksession name="testhellowrold" />
+        <ksession name="testhellowrold" type="stateful" />
+        <ksession name="testhellowrold_1" type="stateless" />
     </kbase>
+
+    <kbase name="isIn" packages="rules.isin">
+        <ksession name="isIn" />
+    </kbase>
+
+    <kbase name="isFrom" packages="rules.isfrom">
+        <ksession name="isFrom" />
+    </kbase>
+
+    <kbase name="isCollect" packages="rules.iscollect">
+        <ksession name="isCollect" />
+    </kbase>
+
+    <kbase name="isAccumulate" packages="rules.isaccumulate">
+        <ksession name="isAccumulate" />
+    </kbase>
+
 </kmodule>

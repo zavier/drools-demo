@@ -1,0 +1,13 @@
+package rules.isfrom;
+
+import com.pojo.Person;
+import com.pojo.School;
+
+
+rule "测试from"
+    when
+        $p: Person($ps: school)
+        $s: School(className == "一班") from $ps;
+    then
+        System.out.println("测试from: " + $p + "," + $s);
+end

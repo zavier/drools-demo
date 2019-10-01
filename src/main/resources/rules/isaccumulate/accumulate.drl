@@ -1,0 +1,45 @@
+package rules.isaccumulate;
+
+import com.pojo.Person;
+
+rule "测试accumulate 取最大值、最小值"
+    when
+        accumulate(Person($age: age), $min:min($age), $max:max($age), $sum:sum($age))
+    then
+        System.out.println("max:" + $max + ", min: " + $min + ",sum:" + $sum);
+end
+
+rule "测试accumulate 第二种用法"
+    when
+        $total: Integer() from
+            accumulate(Person($value: age),
+                        init(Integer total = 0;),
+                        action(total += $value;),
+                        result(total)
+                       )
+    then
+        System.out.println("total:" + $total);
+end
+
+rule "测试accumulate reverse"
+    when
+        $total: Integer() from
+            accumulate(Person($value: age),
+                        init(Integer total = 0;),
+                        action(total += $value; System.out.println(total + ">>>>>");),
+                        reverse(total -= $value; System.out.println(total + "<<<<<<");),
+                        result(total)
+                       )
+    then
+        System.out.println("total:" + $total);
+end
+
+
+rule "测试accumulate 1 reverse"
+    when
+        $ps: Person(dous >= 3)
+    then
+        $ps.setDous(1.2);
+        update($ps);
+        System.out.println($ps.getDous());
+end

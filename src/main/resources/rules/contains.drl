@@ -3,6 +3,8 @@ package rules;
 import com.pojo.Person;
 import com.pojo.School;
 
+global java.lang.String str
+
 rule "containsTest"
     when
         $s : School()

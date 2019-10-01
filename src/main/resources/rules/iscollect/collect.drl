@@ -1,0 +1,20 @@
+package rules.iscollect;
+
+import java.util.ArrayList;
+import com.pojo.Person;
+import com.pojo.School;
+
+rule "测试from collect"
+    when
+        $al: ArrayList() from collect($p: Person(className == "一班"))
+    then
+        System.out.println("res size: " + $al.size());
+end
+
+
+rule "测试from collect pattern"
+    when
+        $al: ArrayList(size >= 3) from collect($p: Person(className == "一班"))
+    then
+        System.out.println("res size: " + $al.size());
+end
